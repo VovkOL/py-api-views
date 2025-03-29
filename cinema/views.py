@@ -28,12 +28,12 @@ class GenreDetail(APIView):
 
     def get(self, request, pk):
         genre = self.get_object(pk)
-        serializer = GenreSerializer(genre)
+        serializer = GenreSerializer(genre, data=request.data)
         return Response(serializer.data,status=status.HTTP_200_OK)
 
     def put(self, request,pk):
         genre = self.get_object(pk)
-        serializer = GenreSerializer(genre)
+        serializer = GenreSerializer(genre, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
